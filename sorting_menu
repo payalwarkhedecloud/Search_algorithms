@@ -1,0 +1,70 @@
+#include <iostream>
+using namespace std;
+
+// Linear Search Function
+int linearSearch(int arr[], int n, int key) {
+    for (int i = 0; i < n; i++) {
+        if (arr[i] == key)
+            return i;   // found at index i
+    }
+    return -1;          // not found
+}
+
+//  Binary Search Function
+int binarySearch(int arr[], int n, int key) {
+    int low = 0, high = n - 1;
+    while (low <= high) {
+        int mid = (low + high) / 2;
+        if (arr[mid] == key)
+            return mid;
+        else if (arr[mid] < key)
+            low = mid + 1;
+        else
+            high = mid - 1;
+    }
+    return -1;
+}
+
+int main() {
+    int n;
+    cout << "Enter number of customer IDs: ";
+    cin >> n;
+
+    int arr[n];
+    cout << "Enter customer IDs (sorted for binary search): ";
+    for (int i = 0; i < n; i++)
+        cin >> arr[i];
+
+    int choice, key;
+    cout << "\n---- Search Menu ----";
+    cout << "\n1. Linear Search";
+    cout << "\n2. Binary Search";
+    cout << "\nEnter your choice (1 or 2): ";
+    cin >> choice;
+
+    cout << "Enter ID to search: ";
+    cin >> key;
+
+    switch (choice) {
+        case 1: {
+            int res = linearSearch(arr, n, key);
+            if (res != -1)
+                cout << "Customer ID found at index " << res << " using Linear Search.\n";
+            else
+                cout << "Customer ID not found.\n";
+            break;
+        }
+        case 2: {
+            int res = binarySearch(arr, n, key);
+            if (res != -1)
+                cout << "Customer ID found at index " << res << " using Binary Search.\n";
+            else
+                cout << "Customer ID not found.\n";
+            break;
+        }
+        default:
+            cout << "Invalid choice!\n";
+    }
+
+    return 0;
+}
